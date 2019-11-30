@@ -12,7 +12,6 @@ public class Game {
 		this.wordLength = wordLength;
 	}
 
-	
 	public String getUserWord() {
 		return userWord;
 	}
@@ -20,7 +19,6 @@ public class Game {
 	public void setUserWord(String userWord) {
 		this.userWord = userWord;
 	}
-
 
 	public String getGuessedWord() {
 		return guessedWord;
@@ -30,43 +28,34 @@ public class Game {
 		this.guessedWord = guessedWord;
 	}
 	
-	public int getBulls() {
+	
+	public ArrayList<Integer> getBulls() {
+		ArrayList<Integer> getBulls= new ArrayList<>();
 		int bulls = 0;
-		for(int i=0; i<userWord.length(); i++) {
+		for(int i=0; i<wordLength; i++) {
 			char letterGuessed = guessedWord.charAt(i);
 			char letterUser = userWord.charAt(i);
 			if(letterGuessed == letterUser) {
+				getBulls.add(i);
 				bulls++;
 			}
 		}
-		return bulls;
-	}
-	
-	public ArrayList<Integer> bullPosition() {
-		ArrayList<Integer> bullPosition= new ArrayList<>();
-		for(int i=0; i<userWord.length(); i++) {
-			char letterGuessed = guessedWord.charAt(i);
-			char letterUser = userWord.charAt(i);
-			if(letterGuessed == letterUser) {
-				bullPosition.add(i);
-			}
-		}
-		return bullPosition;
+		return getBulls;
 	}
 	
 	public int getCows() {
-		Game game = new Game(userWord, guessedWord, 0);
+		Game game = new Game(userWord, guessedWord, wordLength);
 		int cows = 0;
-		ArrayList<Integer> bullPosition = game.bullPosition();
+		ArrayList<Integer> bullPosition = game.getBulls();
 		
-		ArrayList<String> Userletters= new ArrayList<>();
-		for (int i=0; i< userWord.length(); i++) {
-			Userletters.add(userWord.substring(i, i+1));
+		ArrayList<String> userLetters= new ArrayList<>();
+		for (int i=0; i< wordLength; i++) {
+			userLetters.add(userWord.substring(i, i+1));
 		}
 		
-		for (int i=0; i<3; i++) {
+		for (int i=0; i< wordLength; i++) {
 			String letter = guessedWord.substring(i, i+1);
-			if(!bullPosition.contains(i) && Userletters.contains(letter)) {
+			if(!bullPosition.contains(i) && userLetters.contains(letter)) {
 				cows++;
 			}
 			
@@ -77,10 +66,10 @@ public class Game {
 	
 	
 	public boolean win() {
-		Game game = new Game(userWord, guessedWord, 0);
+		Game game = new Game(userWord, guessedWord, wordLength);
 		boolean winOrnot;
-		int bulls = game.getBulls();
-		if(bulls == 3) {
+		int bulls = game.getBulls().size();
+		if(bulls == wordLength) {
 			winOrnot = true;
 		}else {
 			winOrnot = false;
