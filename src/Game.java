@@ -28,7 +28,7 @@ public class Game {
 		this.guessedWord = guessedWord;
 	}
 	
-	
+
 	public ArrayList<Integer> getBulls() {
 		ArrayList<Integer> getBulls= new ArrayList<>();
 		int bulls = 0;
@@ -67,13 +67,8 @@ public class Game {
 	
 	public boolean win() {
 		Game game = new Game(userWord, guessedWord, wordLength);
-		boolean winOrnot;
 		int bulls = game.getBulls().size();
-		if(bulls == wordLength) {
-			winOrnot = true;
-		}else {
-			winOrnot = false;
-		}
+		boolean winOrnot = bulls == wordLength;
 		return winOrnot;
 	}
 	
