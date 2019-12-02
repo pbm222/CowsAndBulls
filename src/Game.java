@@ -7,7 +7,7 @@ public class Game {
 	private int wordLength;
 	
 	public Game(String userWord, String guessedWord, int wordLength) {
-		this.setUserWord(userWord);
+		this.userWord = (userWord);
 		this.guessedWord = guessedWord;
 		this.wordLength = wordLength;
 	}

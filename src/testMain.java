@@ -1,22 +1,34 @@
+import java.util.Scanner;
 
 public class testMain {
 
     public static void main(String[] args) {
+        System.out.println("Hello, my dear friend! Let's play a game: Cows and Bulls! ");
+        System.out.println("\n");
+        System.out.println("Please enter the number of letters in a word you want to guess:");
+        Scanner sc = new Scanner(System.in);
+        int wordLength = sc.nextInt();
 
-        String userWord = "talsi";
+        Reader dictionaryReader = new Reader();
+        String guessedWord = dictionaryReader.getRandomWord(wordLength);
 
-        String guessedWord = "table";
+        System.out.println("Try to guess a word:");
+        Scanner ab = new Scanner(System.in);
+        String userWord = ab.nextLine();
+        Game game = new Game(userWord, guessedWord, wordLength);
 
-        Game game = new Game(userWord, guessedWord, userWord.length());
-        //System.out.println(userWord.charAt(0));
-
-        if (game.win() != true) {
+        do {
             System.out.println("Bulls: " + game.getBulls().size());
             System.out.println("Cows: " + game.getCows());
 
-        } else {
-            System.out.println("You won!");
-        }
+            System.out.println("Try harder! New try : ");
+            ab = new Scanner(System.in);
+            userWord = ab.nextLine();
+            game.setUserWord(userWord);
+
+        } while (!game.win());
+
+        System.out.println("You are a champion!!!");
 
 
     }
